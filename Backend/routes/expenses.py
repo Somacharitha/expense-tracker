@@ -9,7 +9,7 @@ expense_routes = Blueprint("expense_routes", __name__)
 DATABASE = "database.db"
 
 
-# ------------------ GET EXPENSES (WITH OPTIONAL FILTER) ------------------
+# ------------------ GET EXPENSES (WITH OPTIONAL FILTERS) ------------------
 @expense_routes.route("/expenses", methods=["GET"])
 @token_required
 def get_expenses(current_user):
@@ -17,17 +17,27 @@ def get_expenses(current_user):
     cursor = conn.cursor()
 
     category = request.args.get("category")
+    from_date = request.args.get("from")
+    to_date = request.args.get("to")
 
+    # Base query
+    query = "SELECT id, amount, category, date FROM expenses WHERE user_id=?"
+    params = [current_user["id"]]
+
+    # Apply optional filters
     if category:
-        cursor.execute(
-            "SELECT id, amount, category, date FROM expenses WHERE user_id=? AND category=?",
-            (current_user["id"], category)
-        )
-    else:
-        cursor.execute(
-            "SELECT id, amount, category, date FROM expenses WHERE user_id=?",
-            (current_user["id"],)
-        )
+        query += " AND category=?"
+        params.append(category)
+
+    if from_date:
+        query += " AND date >= ?"
+        params.append(from_date)
+
+    if to_date:
+        query += " AND date <= ?"
+        params.append(to_date)
+
+    cursor.execute(query, tuple(params))
 
     rows = cursor.fetchall()
     conn.close()
@@ -102,7 +112,6 @@ def monthly_summary(current_user):
 def add_expense(current_user):
     data = request.get_json()
 
-    # Use external validator
     validation_error = validate_expense_data(data)
     if validation_error:
         return error_response(validation_error, 400)
@@ -152,7 +161,6 @@ def update_expense(current_user, expense_id):
         conn.close()
         return error_response("Expense not found", 404)
 
-    # Validate only if fields provided
     if data:
         if "amount" in data:
             try:
