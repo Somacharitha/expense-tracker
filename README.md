@@ -1,48 +1,74 @@
-# 💰 Smart Expense Tracker (Full Stack)
+# 💰 Expense Tracker (Full Stack Web Application)
 
-A full-stack expense tracking web application built using modern technologies.
+A modern full-stack Expense Tracker web application that helps users manage their daily expenses, track spending patterns, and visualize financial data through an interactive dashboard.
+
+This project demonstrates full-stack development using **React, Flask, and SQLite**, along with authentication, data visualization, and expense analytics.
 
 ---
 
-## 🚀 Tech Stack
+# 🚀 Features
 
-### 🔹 Backend
-- FastAPI
-- SQLite
-- JWT Authentication
-- REST APIs
+### 🔐 Authentication
+- User Registration
+- User Login
+- Secure JWT Authentication
+- Protected Dashboard
 
-### 🔹 Frontend
+### 💸 Expense Management
+- Add Expenses
+- Edit Expenses
+- Delete Expenses
+- View Expense History
+
+### 📊 Dashboard Analytics
+- Category-wise Expense Pie Chart
+- Monthly Spending Bar Chart
+- Budget Tracking System
+- Expense Summary Cards
+
+### 🔎 Smart Filters
+- Search Expenses
+- Filter by Category
+- Filter by Date Range
+- Sort Expenses (Highest / Lowest / Newest / Oldest)
+
+### 📁 Export Data
+- Export Expense Data to CSV
+
+---
+
+# 🛠 Tech Stack
+
+## Frontend
 - React
 - Tailwind CSS
-- Axios
+- Recharts
+- React Router
+- React Toastify
+
+## Backend
+- Flask
+- Flask JWT Authentication
+- SQLite Database
+- REST API
 
 ---
 
-## ✨ Features
+# 📊 Dashboard Overview
 
-- User Signup & Login
-- JWT Protected Routes
-- Add / Edit / Delete Expenses
-- Clean UI
-- Secure Backend APIs
+The dashboard provides a complete overview of financial data:
 
----
-
-## 🛠 How to Run Locally
-
-### Backend
-cd Backend
-pip install -r requirements.txt
-uvicorn app:app --reload
-
-### Frontend
-cd Frontend
-npm install
-npm start
+- Total Expense Tracking
+- Budget Monitoring
+- Category-wise Expense Distribution
+- Monthly Spending Analysis
+- Expense Filtering and Search
 
 ---
 
-## 👩‍💻 Author
+# 📦 Installation Guide
 
-Nagareddy Somacharitha
+## Clone Repository
+
+```bash
+git clone https://github.com/Somacharitha/expense-tracker.git
